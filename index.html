@@ -1,16 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link rel="stylesheet" href="./main.css">
-  <title>Document</title>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300" rel="stylesheet">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'>
+  <link rel='stylesheet' href='./main.css'>
+  <title>SimpleTube</title>
 </head>
+
 <body>
-  <h1>Test</h1>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <main>
+    <section class="search card">
+      <h1>SimpleTube <i class="fa fa-youtube-play" aria-hidden="true"></i></h1>
+      <form id='js-search-form'>
+        <label for='query'></label>
+        <input type='text' id='js-search-query' placeholder='Search'>
+        <button id='search-button' type='submit'><i class="fa fa-search" aria-hidden="true"></i></button>
+      </form>
+    </section>
+    <section class="results card"> <!--HIDDEN UNTIL SEARCH BUTTON IS PRESSED-->
+      <h2>Results:</h2>
+      <ol id='js-results'>
+        <li>
+          <article class='result'>
+            <img src="http://c8.alamy.com/comp/AWDK0P/stock-photograph-of-a-pretty-asian-girl-screaming-into-a-trumpet-AWDK0P.jpg" alt="">
+            <h4>Title</h4>
+            <p>Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga necessitatibus, maxime, possimus reiciendis ipsum deleniti? Minus necessitatibus voluptate fugiat enim. Repellendus earum deserunt, animi dignissimos ullam deleniti expedita, natus blanditiis.</p>
+          </article>
+        </li>
+        <li>
+          <article class='result'>
+            <img src="http://c8.alamy.com/comp/AWDK0P/stock-photograph-of-a-pretty-asian-girl-screaming-into-a-trumpet-AWDK0P.jpg" alt="">
+            <h4>Title</h4>
+            <p>Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi suscipit, debitis reprehenderit modi officiis minima laboriosam accusamus quis sapiente ratione dolore enim culpa officia, doloremque dolor, atque temporibus sequi deserunt?</p>
+          </article>
+        </li>
+      </ol>
+    </section>
+  </main>
+  <script src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=' crossorigin='anonymous'></script>
   <script src='./app.js'></script>
 </body>
+
 </html>

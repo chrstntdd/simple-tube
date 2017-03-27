@@ -1,3 +1,79 @@
-h1{
-  color: paleturquoise;
+*{
+  box-sizing: border-box;
+}
+
+html{
+  background-color: red;
+}
+
+h1,h2{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 100;
+  text-align: center;
+  color: white;
+}
+
+.search{
+  width: 640px;
+  padding-bottom: 20px;
+  margin: 12rem auto 0 auto;
+}
+
+.results{
+  background-color: #E3E4DB;
+  width: 640px;
+  padding: 5px;
+  margin: 0 auto 0 auto;
+}
+
+.result{
+  background-color: white;
+  padding: 5px;
+  width: 95%;
+  margin: 0 auto 15px auto;
+  -webkit-box-shadow: 0px 6px 8px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 6px 8px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 6px 8px 0px rgba(0,0,0,0.75);
+}
+
+.result img {
+  width: 100%;
+  display: block;
+  margin: 0 auto 0 auto;
+}
+
+#search-button{
+  display: block;
+  margin: 0 auto 0 auto;
+  background-color: white;
+  border-radius: 3px;
+  margin-top: 20px;
+  border: none;
+  padding: 10px 15px 10px 15px;
+}
+
+#js-search-query{
+  display: block;
+  margin: 0 auto 0 auto;
+  padding: 10px;
+  border-radius: 3px;
+  border: none;
+  width: 75%;
+}
+
+#js-results{
+  -webkit-padding-start: 0px;
+  list-style: none;
+}
+
+.hidden{
+  display: none;
+}
+
+
+/*MOBILE STYLES*/
+@media only screen and (max-width: 640px) {
+  .card,.result {
+    width: 100%;
+  }
 }
