@@ -36,24 +36,15 @@ function getDataFromAPI(searchTerm) {
 
 function renderResults(results) {
   $.each(results.items, function(index, value){
-    renderThumbnail(value);
-    renderTitle(value);
-    renderURL(value);
+    getVideoData(value);
   });
 }
 
-function renderThumbnail(results){
-  var thumb = results.snippet.thumbnails.medium.url
-  // console.log(thumb);
-}
-
-function renderTitle (results){
-  var videoTitle = results.snippet.title;
-  // console.log(videoTitle);
-}
-
-function renderURL (results){
+function getVideoData(results){
   const YOUTUBE_BASE_URL = 'https://www.youtube.com/watch?v='
-  var videoId = results.id.videoId;
-  // console.log(YOUTUBE_BASE_URL + videoId);
+  var videoData = Object.create(null);
+  videoData.thumbnail = results.snippet.thumbnails.medium.url;
+  videoData.title = results.snippet.title;
+  videoData.url = YOUTUBE_BASE_URL + results.id.videoId;
+  console.log(videoData);
 }
