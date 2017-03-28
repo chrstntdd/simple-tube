@@ -35,7 +35,7 @@ function getDataFromAPI(searchTerm) {
   };
   $.getJSON(YT_ENDPOINT_URL, params, function (searchTerm) {
     renderResults(searchTerm);
-    getMoreResults(params, searchTerm);
+    //getMoreResults(params, searchTerm);
   });
 }
 
@@ -43,16 +43,15 @@ function getMoreResults(params, searchTerm) {
   /*assign pageToken property on params to .nextPageToken 
   before making another request to load more results.*/
 
-  //console.log(response.nextPageToken);
-  $(window).scroll(function () {
-    if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-      params.pageToken = searchTerm.nextPageToken;
-      $.getJSON(YT_ENDPOINT_URL, params, function (searchTerm) {
-        renderResults(searchTerm);
-        getMoreResults(params, searchTerm);
-      });
-    }
-  });
+  // $(window).scroll(function () {
+  //   if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+  //     params.pageToken = searchTerm.nextPageToken;
+  //     $.getJSON(YT_ENDPOINT_URL, params, function (searchTerm) {
+  //       renderResults(searchTerm);
+  //       getMoreResults(params, searchTerm);
+  //     });
+  //   }
+  // });
 }
 
 function renderResults(results) {
@@ -62,12 +61,11 @@ function renderResults(results) {
 }
 
 function getVideoData(results){
-  const YOUTUBE_BASE_URL = 'https://www.youtube.com/watch?v='
-  var videoData = Object.create(null);
-  videoData.thumbnail = results.snippet.thumbnails.medium.url;
-  videoData.title = results.snippet.title;
-  videoData.url = YOUTUBE_BASE_URL + results.id.videoId;
-  // console.log(videoData);
+  var videoData = {
+    thumbnail: results.snippet.thumbnails.medium.url,
+    title: results.snippet.title,
+    url: 'https://www.youtube.com/watch?v=' + results.id.videoId,
+  }
   return videoData;
 }
 
