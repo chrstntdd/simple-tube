@@ -26,6 +26,14 @@ h2.video-title{
   color: black;
 }
 
+#channel-title h4{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 100;
+  font-size: 1rem;
+  text-align: center;
+  color: black
+}
+
 .search{
   width: 640px;
   padding-bottom: 20px;
@@ -33,7 +41,7 @@ h2.video-title{
 }
 
 .results{
-  background-color: #E3E4DB;
+  /*background-color: #E3E4DB;*/
   width: 640px;
   padding: 5px;
   margin: 0 auto 0 auto;
@@ -77,6 +85,19 @@ h2.video-title{
 #js-results{
   -webkit-padding-start: 0px;
   list-style: none;
+}
+
+#next-btn{
+  background-color: white;
+  display: block;
+  margin: 0 auto 0 auto;
+  border: none;
+  padding: 15px;
+  border-radius: 3px;
+}
+
+#next-btn:hover, #search-button:hover{
+  color: red;
 }
 
 .hidden{
