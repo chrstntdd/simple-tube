@@ -22,6 +22,10 @@ h2{
   color: white;
 }
 
+h2.video-title{
+  color: black;
+}
+
 .search{
   width: 640px;
   padding-bottom: 20px;

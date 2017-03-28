@@ -8,8 +8,10 @@ $(function () {
 var resultCardTemplate = (
   '<li>' +
     '<article class="result">' +
-      '<img src="" alt="">' +
-      '<h4></h4>' +
+      '<a href="">' +
+        '<img src="" alt="">' +
+      '</a>' +
+      '<h2 class="video-title"></h2>' +
     '</article>' +
   '</li>'
 )
@@ -19,6 +21,7 @@ function getUserSearch() {
     e.preventDefault();
     var searchTerm = $('#js-search-query').val()
     this.reset();
+    $('#results').removeClass('hidden');
     getDataFromAPI(searchTerm);
   })
 }
@@ -53,8 +56,9 @@ function getVideoData(results){
 
 function renderVideoCard (videoData, videoTemplate){
   var result = $(videoTemplate);
-  result.find('h4').text(videoData.title);
+  result.find('h2').text(videoData.title);
   result.find('img').attr('src', videoData.thumbnail);
+  result.find('a').attr('href', videoData.url);
   // console.log(result);
   $('#js-results').append(result);
 }
