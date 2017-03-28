@@ -35,6 +35,23 @@ function getDataFromAPI(searchTerm) {
   };
   $.getJSON(YT_ENDPOINT_URL, params, function (searchTerm) {
     renderResults(searchTerm);
+    getMoreResults(params, searchTerm);
+  });
+}
+
+function getMoreResults(params, searchTerm) {
+  /*assign pageToken property on params to .nextPageToken 
+  before making another request to load more results.*/
+
+  //console.log(response.nextPageToken);
+  $(window).scroll(function () {
+    if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+      params.pageToken = searchTerm.nextPageToken;
+      $.getJSON(YT_ENDPOINT_URL, params, function (searchTerm) {
+        renderResults(searchTerm);
+        getMoreResults(params, searchTerm);
+      });
+    }
   });
 }
 
