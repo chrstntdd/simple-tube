@@ -7,7 +7,7 @@ $(function () {
 
 var resultCardTemplate = (
   '<li>' +
-    '<article class="results">' +
+    '<article class="result">' +
       '<img src="" alt="">' +
       '<h4></h4>' +
     '</article>' +
@@ -18,6 +18,7 @@ function getUserSearch() {
   $('#js-search-form').submit(function (e) {
     e.preventDefault();
     var searchTerm = $('#js-search-query').val()
+    this.reset();
     getDataFromAPI(searchTerm);
   })
 }
@@ -36,7 +37,7 @@ function getDataFromAPI(searchTerm) {
 
 function renderResults(results) {
   $.each(results.items, function(index, value){
-    getVideoData(value);
+    renderVideoCard(getVideoData(value), resultCardTemplate);
   });
 }
 
@@ -46,5 +47,14 @@ function getVideoData(results){
   videoData.thumbnail = results.snippet.thumbnails.medium.url;
   videoData.title = results.snippet.title;
   videoData.url = YOUTUBE_BASE_URL + results.id.videoId;
-  console.log(videoData);
+  // console.log(videoData);
+  return videoData;
+}
+
+function renderVideoCard (videoData, videoTemplate){
+  var result = $(videoTemplate);
+  result.find('h4').text(videoData.title);
+  result.find('img').attr('src', videoData.thumbnail);
+  // console.log(result);
+  $('#js-results').append(result);
 }
