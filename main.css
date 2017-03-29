@@ -87,10 +87,10 @@ h2.video-title{
   list-style: none;
 }
 
-#next-btn{
+#results button {
   background-color: white;
   display: block;
-  margin: 0 auto 0 auto;
+  margin: 0 auto 10px auto;
   border: none;
   padding: 15px;
   border-radius: 3px;
