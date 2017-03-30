@@ -31,7 +31,8 @@ h2.video-title{
   font-weight: 100;
   font-size: 1rem;
   text-align: center;
-  color: black
+  color: darkgrey;
+  text-decoration: underline;
 }
 
 .search{
@@ -89,14 +90,18 @@ h2.video-title{
 
 #results button {
   background-color: white;
-  display: block;
-  margin: 0 auto 10px auto;
+  display: inline-block;
   border: none;
   padding: 15px;
   border-radius: 3px;
 }
 
-#next-btn:hover, #search-button:hover{
+nav{
+  /*centers navigation buttons*/
+  text-align: center;
+}
+
+#next-btn:hover, #back-btn:hover, #search-button:hover{
   color: red;
 }
 
@@ -112,5 +117,12 @@ h2.video-title{
   }
   h1{
     font-size: 2.6rem;
+  }
+  #channel-title h4{
+    margin: 10px auto 10px auto;
+    font-size: 2.5vh;
+  }
+  .video-title{
+    font-size: 3vh;
   } 
 }

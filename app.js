@@ -19,6 +19,10 @@ var resultCardTemplate = (
   '</li>'
 )
 
+state = {
+  pageCount: 0
+}
+
 var params = {
   part: 'snippet',
   key: YT_API_KEY,
@@ -49,13 +53,19 @@ function renderResults(apiResponse) {
   $.each(apiResponse.items, function (index, value) {
     renderVideoCard(getVideoData(value), resultCardTemplate);
   });
-  $('#next-btn, #back-btn').removeClass('hidden');
+  renderPaginationButtons();
+}
+
+function renderPaginationButtons(){
+  //Displays appropriate pagination buttons depending on page count.
+  state.pageCount <= 0 ? $('#back-btn').hide() : $('#next-btn, #back-btn').show();
 }
 
 function handleNextButton(apiResponse) {
   $('#next-btn').off().click(function (e) { //http://stackoverflow.com/questions/14969960/jquery-click-events-firing-multiple-times
     $('#js-results').html(''); //clear old results
     params.pageToken = apiResponse.nextPageToken;
+    state.pageCount++;
     getDataFromAPI();
   });
 }
@@ -64,6 +74,7 @@ function handleBackButton(apiResponse) {
   $('#back-btn').off().click(function (e) {
     $('#js-results').html(''); //clear old results
     params.pageToken = apiResponse.prevPageToken
+    state.pageCount--;
     getDataFromAPI();
   });
 }
