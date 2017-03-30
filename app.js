@@ -37,6 +37,8 @@ function getUserSearch() {
     e.preventDefault();
     params.q = $('#js-search-query').val()
     this.reset();
+    $('#js-results').html(''); //clear old results
+    state.pageCount = 0; //reset state
     $('#results').removeClass('hidden');
     getDataFromAPI();
   })
