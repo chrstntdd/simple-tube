@@ -17,7 +17,6 @@ h1{
 h2{
   font-family: 'Poppins', sans-serif;
   font-weight: 100;
-  font-size: 2rem;
   text-align: center;
   color: white;
 }
@@ -36,14 +35,13 @@ h2.video-title{
 }
 
 .search{
-  width: 640px;
   padding-bottom: 20px;
   margin: 12rem auto 0 auto;
+  width: 740px
 }
 
 .results{
   /*background-color: #E3E4DB;*/
-  width: 640px;
   padding: 5px;
   margin: 0 auto 0 auto;
 }
@@ -94,6 +92,7 @@ h2.video-title{
   border: none;
   padding: 15px;
   border-radius: 3px;
+  margin: 30px 50px 20px 50px;
 }
 
 nav{
@@ -125,4 +124,7 @@ nav{
   .video-title{
     font-size: 3vh;
   } 
+  #results button {
+    margin: 20px;
+  }
 }

@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Poppins:300" rel="stylesheet">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'>
+  <link rel="stylesheet" href='./float-grid.css'>
   <link rel='stylesheet' href='./main.css'>
   <title>SimpleTube</title>
 </head>
@@ -24,7 +25,9 @@
     </section>
     <section id='results' class="results card hidden"> <!--HIDDEN UNTIL SEARCH BUTTON IS PRESSED-->
       <h2>Results:</h2>
-      <ol id='js-results'></ol>
+      <div class="row">
+        <ol id='js-results'></ol>
+      </div>
       <nav>
         <button id="back-btn"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</button>
         <button id="next-btn">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>

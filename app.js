@@ -6,7 +6,7 @@ $(function () {
 });
 
 var resultCardTemplate = (
-  '<li>' +
+  '<li class="col-4">' +
     '<article class="result">' +
       '<a id="thumbnail-link"href="" target="_blank">' +
         '<img src="" alt="">' +
@@ -28,7 +28,8 @@ var params = {
   key: YT_API_KEY,
   q: '',
   type: 'video',
-  pageToken: ''
+  pageToken: '',
+  maxResults : 6
 };
 
 function getUserSearch() {
