@@ -6,9 +6,9 @@ $(function () {
 });
 
 var resultCardTemplate = (
-  '<li class="col-4">' +
+  '<li>' +
     '<article class="result">' +
-      '<a id="thumbnail-link"href="" target="_blank">' +
+      '<a id="thumbnail-link" href="" target="_blank">' +
         '<img src="" alt="">' +
       '</a>' +
       '<h2 class="video-title"></h2>' +
@@ -29,7 +29,6 @@ var params = {
   q: '',
   type: 'video',
   pageToken: '',
-  maxResults : 6
 };
 
 function getUserSearch() {
@@ -77,6 +76,10 @@ function renderPaginationButtons(){
 }
 
 function renderVideoCard(videoData, videoTemplate) {
+  //trim long titles to prevent layout inconsistencies.
+  if (videoData.title.length >= 30){
+    videoData.title = videoData.title.substr(0,30) + '...';
+  }
   //bind data to HTML template then add to DOM
   var result = $(videoTemplate);
   result.find('h2').text(videoData.title);

@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Poppins:300" rel="stylesheet">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'>
-  <link rel="stylesheet" href='./float-grid.css'>
   <link rel='stylesheet' href='./main.css'>
   <title>SimpleTube</title>
 </head>
@@ -19,15 +18,13 @@
       <h1>SimpleTube <i class="fa fa-youtube-play" aria-hidden="true"></i></h1>
       <form id='js-search-form'>
         <label for='query'></label>
-        <input type='text' id='js-search-query' placeholder='Search'>
+        <input type='text' id='js-search-query' placeholder='Search' required>
         <button id='search-button' type='submit'><i class="fa fa-search" aria-hidden="true"></i></button>
       </form>
     </section>
     <section id='results' class="results card hidden"> <!--HIDDEN UNTIL SEARCH BUTTON IS PRESSED-->
       <h2>Results:</h2>
-      <div class="row">
-        <ol id='js-results'></ol>
-      </div>
+      <ol id='js-results'></ol>
       <nav>
         <button id="back-btn"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</button>
         <button id="next-btn">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
