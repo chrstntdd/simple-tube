@@ -19,7 +19,7 @@ var resultCardTemplate = (
   '</li>'
 )
 
-state = {
+var state = {
   pageCount: 0
 }
 
@@ -52,6 +52,18 @@ function getDataFromAPI() {
   });
 }
 
+function getVideoData(results) {
+  //Gets relevant data from API call
+  var videoData = {
+    thumbnail: results.snippet.thumbnails.medium.url,
+    title: results.snippet.title,
+    url: 'https://www.youtube.com/watch?v=' + results.id.videoId,
+    channelURL: 'https://www.youtube.com/channel/' + results.snippet.channelId,
+    channelName: results.snippet.channelTitle
+  }
+  return videoData;
+}
+
 function renderResults(apiResponse) {
   $.each(apiResponse.items, function (index, value) {
     renderVideoCard(getVideoData(value), resultCardTemplate);
@@ -62,6 +74,17 @@ function renderResults(apiResponse) {
 function renderPaginationButtons(){
   //Displays appropriate pagination buttons depending on page count.
   state.pageCount <= 0 ? $('#back-btn').hide() : $('#next-btn, #back-btn').show();
+}
+
+function renderVideoCard(videoData, videoTemplate) {
+  //bind data to HTML template then add to DOM
+  var result = $(videoTemplate);
+  result.find('h2').text(videoData.title);
+  result.find('#channel-title').attr('href', videoData.channelURL);
+  result.find('#channel-title h4').text(videoData.channelName);
+  result.find('img').attr('src', videoData.thumbnail);
+  result.find('#thumbnail-link').attr('href', videoData.url);
+  $('#js-results').append(result);
 }
 
 function handleNextButton(apiResponse) {
@@ -80,27 +103,4 @@ function handleBackButton(apiResponse) {
     state.pageCount--;
     getDataFromAPI();
   });
-}
-
-function getVideoData(results) {
-  //Gets relevant data from API call
-  var videoData = {
-    thumbnail: results.snippet.thumbnails.medium.url,
-    title: results.snippet.title,
-    url: 'https://www.youtube.com/watch?v=' + results.id.videoId,
-    channelURL: 'https://www.youtube.com/channel/' + results.snippet.channelId,
-    channelName: results.snippet.channelTitle
-  }
-  return videoData;
-}
-
-function renderVideoCard(videoData, videoTemplate) {
-  //bind data to HTML template then add to DOM
-  var result = $(videoTemplate);
-  result.find('h2').text(videoData.title);
-  result.find('#channel-title').attr('href', videoData.channelURL);
-  result.find('#channel-title h4').text(videoData.channelName);
-  result.find('img').attr('src', videoData.thumbnail);
-  result.find('#thumbnail-link').attr('href', videoData.url);
-  $('#js-results').append(result);
 }
