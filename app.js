@@ -19,62 +19,56 @@ var resultCardTemplate = (
   '</li>'
 )
 
+var params = {
+  part: 'snippet',
+  key: YT_API_KEY,
+  q: '',
+  type: 'video',
+  pageToken: ''
+};
+
 function getUserSearch() {
   $('#js-search-form').submit(function (e) {
     e.preventDefault();
-    var searchTerm = $('#js-search-query').val()
+    params.q = $('#js-search-query').val()
     this.reset();
     $('#results').removeClass('hidden');
-    getDataFromAPI(searchTerm);
+    getDataFromAPI();
   })
 }
 
-function getDataFromAPI(searchTerm) {
-  var params = {
-    part: 'snippet',
-    key: YT_API_KEY,
-    q: searchTerm,
-    type: 'video'
-  };
-  $.getJSON(YT_ENDPOINT_URL, params, function (searchTerm) {
-    renderResults(searchTerm);
-    getMoreResults(params, searchTerm);
+function getDataFromAPI() {
+  $.getJSON(YT_ENDPOINT_URL, params, function (apiResponse) {
+    renderResults(apiResponse);
+    handleNextButton(apiResponse);
+    handleBackButton(apiResponse);
   });
 }
 
-function getMoreResults(params, searchTerm) {
-  /*assign pageToken property on params to .nextPageToken 
-  before making another request to load more results.*/
-
-  // $(window).scroll(function () {
-  //   if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-  //     params.pageToken = searchTerm.nextPageToken;
-  //     $.getJSON(YT_ENDPOINT_URL, params, function (searchTerm) {
-  //       renderResults(searchTerm);
-  //       getMoreResults(params, searchTerm);
-  //     });
-  //   }
-  // });
-}
-
-function renderResults(results) {
-  $.each(results.items, function(index, value){
-    console.log(value);
+function renderResults(apiResponse) {
+  $.each(apiResponse.items, function (index, value) {
     renderVideoCard(getVideoData(value), resultCardTemplate);
   });
-  renderNextButton();
+  $('#next-btn, #back-btn').removeClass('hidden');
 }
 
-function renderNextButton(){
-  var buttonHTML = '<button id="next-btn">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>'
-  $('#js-results').after(buttonHTML);
-  $('#next-btn').click(function(e){
-    alert('PRESSED');
-    //AJAX CALL FOR MORE DATA;
+function handleNextButton(apiResponse) {
+  $('#next-btn').off().click(function (e) { //http://stackoverflow.com/questions/14969960/jquery-click-events-firing-multiple-times
+    $('#js-results').html(''); //clear old results
+    params.pageToken = apiResponse.nextPageToken;
+    getDataFromAPI();
   });
 }
 
-function getVideoData(results){
+function handleBackButton(apiResponse) {
+  $('#back-btn').off().click(function (e) {
+    $('#js-results').html(''); //clear old results
+    params.pageToken = apiResponse.prevPageToken
+    getDataFromAPI();
+  });
+}
+
+function getVideoData(results) {
   //Gets relevant data from API call
   var videoData = {
     thumbnail: results.snippet.thumbnails.medium.url,
@@ -86,7 +80,7 @@ function getVideoData(results){
   return videoData;
 }
 
-function renderVideoCard (videoData, videoTemplate){
+function renderVideoCard(videoData, videoTemplate) {
   //bind data to HTML template then add to DOM
   var result = $(videoTemplate);
   result.find('h2').text(videoData.title);
