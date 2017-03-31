@@ -20,21 +20,22 @@ var resultCardTemplate = (
 )
 
 var state = {
-  pageCount: 0
+  pageCount: 0,
+  params : {
+    part: 'snippet',
+    key: YT_API_KEY,
+    q: '',
+    type: 'video',
+    pageToken: ''
+  }
 }
 
-var params = {
-  part: 'snippet',
-  key: YT_API_KEY,
-  q: '',
-  type: 'video',
-  pageToken: '',
-};
+ 
 
 function getUserSearch() {
   $('#js-search-form').submit(function (e) {
     e.preventDefault();
-    params.q = $('#js-search-query').val()
+    state.params.q = $('#js-search-query').val()
     this.reset();
     $('#js-results').html(''); //clear old results
     state.pageCount = 0; //reset state
@@ -44,7 +45,7 @@ function getUserSearch() {
 }
 
 function getDataFromAPI() {
-  $.getJSON(YT_ENDPOINT_URL, params, function (apiResponse) {
+  $.getJSON(YT_ENDPOINT_URL, state.params, function (apiResponse) {
     renderResults(apiResponse);
     handleNextButton(apiResponse);
     handleBackButton(apiResponse);
@@ -93,7 +94,7 @@ function renderVideoCard(videoData, videoTemplate) {
 function handleNextButton(apiResponse) {
   $('#next-btn').off().click(function (e) { //http://stackoverflow.com/questions/14969960/jquery-click-events-firing-multiple-times
     $('#js-results').html(''); //clear old results
-    params.pageToken = apiResponse.nextPageToken;
+    state.params.pageToken = apiResponse.nextPageToken;
     state.pageCount++;
     getDataFromAPI();
   });
@@ -102,7 +103,7 @@ function handleNextButton(apiResponse) {
 function handleBackButton(apiResponse) {
   $('#back-btn').off().click(function (e) {
     $('#js-results').html(''); //clear old results
-    params.pageToken = apiResponse.prevPageToken
+    state.params.pageToken = apiResponse.prevPageToken
     state.pageCount--;
     getDataFromAPI();
   });
